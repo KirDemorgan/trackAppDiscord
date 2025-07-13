@@ -1,11 +1,22 @@
 package xyz.demorgan
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.runtime.*
 import androidx.compose.material.Text
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
@@ -44,20 +55,43 @@ fun App() {
         }
     }
 
-    Column {
-        Text(
-            text = "Active window now is: $windowTitle",
-            style = TextStyle(fontFamily = FontFamily.SansSerif)
-        )
-        Spacer(modifier = Modifier.size(16.dp))
-        Text(
-            text = "Process ID: $processId",
-            style = TextStyle(fontFamily = FontFamily.SansSerif)
-        )
-        Spacer(modifier = Modifier.size(16.dp))
-        Text(
-            text = "Process name by id : $processName",
-            style = TextStyle(fontFamily = FontFamily.SansSerif)
-        )
+    Surface(
+        modifier = Modifier.fillMaxSize(),
+        color = Color(0xFF22223B)
+    ) {
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            Card(
+                shape = RoundedCornerShape(16.dp),
+                elevation = 12.dp,
+                backgroundColor = Color(0xFFF2E9E4),
+                modifier = Modifier
+                    .padding(32.dp)
+                    .widthIn(max = 400.dp)
+            ) {
+                Column(
+                    modifier = Modifier.padding(32.dp),
+                    verticalArrangement = Arrangement.spacedBy(20.dp)
+                ) {
+                    Text(
+                        text = "Active window now is: $windowTitle",
+                        style = MaterialTheme.typography.h6,
+                        color = Color(0xFF4A4E69)
+                    )
+                    Text(
+                        text = "Process ID: $processId",
+                        style = MaterialTheme.typography.body1,
+                        color = Color(0xFF22223B)
+                    )
+                    Text(
+                        text = "Process name by id : $processName",
+                        style = MaterialTheme.typography.body1,
+                        color = Color(0xFF22223B)
+                    )
+                }
+            }
+        }
     }
 }
