@@ -27,6 +27,7 @@ kotlin {
             implementation(libs.kotlin.test)
         }
         desktopMain.dependencies {
+            implementation("org.xerial:sqlite-jdbc:3.43.2.0")
             implementation("net.java.dev.jna:jna:5.13.0")
             implementation("net.java.dev.jna:jna-platform:5.13.0")
             implementation(compose.desktop.currentOs)
@@ -41,7 +42,7 @@ compose.desktop {
         mainClass = "xyz.demorgan.MainKt"
 
         nativeDistributions {
-            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+            targetFormats(TargetFormat.Dmg, TargetFormat.Exe, TargetFormat.Deb)
             packageName = "xyz.demorgan"
             packageVersion = "1.0.0"
         }

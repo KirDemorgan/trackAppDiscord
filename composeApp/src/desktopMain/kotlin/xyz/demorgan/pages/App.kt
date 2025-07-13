@@ -1,12 +1,10 @@
-package xyz.demorgan
+package xyz.demorgan.pages
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -17,10 +15,11 @@ import androidx.compose.material.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontFamily
+
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
+import xyz.demorgan.service.SqlLogger
+import xyz.demorgan.service.MediaService
 
 @Composable
 fun App() {
@@ -49,6 +48,7 @@ fun App() {
             if (currentProcessName != lastProcessName) {
                 processName = currentProcessName
                 lastProcessName = currentProcessName
+                SqlLogger().logWindowChange(currentTitle, currentProcessId, currentProcessName)
             }
 
             delay(1000)
