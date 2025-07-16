@@ -18,8 +18,10 @@ import androidx.compose.ui.graphics.Color
 
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
-import xyz.demorgan.service.SqlLogger
-import xyz.demorgan.service.MediaService
+import xyz.demorgan.service.getActiveProcessId
+import xyz.demorgan.service.getActiveWindowTitle
+import xyz.demorgan.service.getProcessNameById
+import xyz.demorgan.service.logWindowChange
 
 @Composable
 fun App() {
@@ -32,23 +34,23 @@ fun App() {
         var lastProcessId: Int? = null
         var lastProcessName: String? = null
         while (true) {
-            val currentTitle = MediaService().getActiveWindowTitle()?.replace("\u0000", "")?.trim() ?: ""
+            val currentTitle = getActiveWindowTitle()?.replace("\u0000", "")?.trim() ?: ""
             if (currentTitle != lastTitle) {
                 windowTitle = currentTitle
                 lastTitle = currentTitle
             }
-            val currentProcessId = MediaService().getActiveProcessId()
+            val currentProcessId = getActiveProcessId()
             if (currentProcessId != lastProcessId) {
                 processId = currentProcessId
                 lastProcessId = currentProcessId
             }
             val currentProcessName = currentProcessId?.let {
-                MediaService().getProcessNameById(it)
+                getProcessNameById(it)
             }
             if (currentProcessName != lastProcessName) {
                 processName = currentProcessName
                 lastProcessName = currentProcessName
-                SqlLogger().logWindowChange(currentTitle, currentProcessId, currentProcessName)
+                logWindowChange(currentTitle, currentProcessId, currentProcessName)
             }
 
             delay(1000)
